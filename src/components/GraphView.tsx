@@ -114,7 +114,6 @@ export default function GraphView({ data }: { data: GraphData }) {
           linkDirectionalParticleSpeed={0.005}
           linkDirectionalParticleColor={() => "rgba(100,116,139,0.6)"}
           onNodeClick={(node: any) => handleNodeClick(node)}
-          nodeLabel={(node: any) => String(node.name ?? node.id)}
         />
       )}
 
