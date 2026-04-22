@@ -1,209 +1,140 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 
-interface Node {
+// Three.js–based graph — must be client-only (no SSR)
+const ForceGraph3D = dynamic(() => import("react-force-graph-3d"), {
+  ssr: false,
+  loading: () => (
+    <div
+      style={{
+        height: 500,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#060614",
+        color: "#475569",
+        fontFamily: "var(--font-patrick-hand)",
+        fontSize: "0.9rem",
+      }}
+    >
+      ✦ Đang tải bản đồ... ✦
+    </div>
+  ),
+});
+
+interface GraphNode {
   id: string;
   label: string;
-}
-
-interface Link {
-  source: string;
-  target: string;
+  [key: string]: unknown;
 }
 
 interface GraphData {
-  nodes: Node[];
-  links: Link[];
+  nodes: GraphNode[];
+  links: { source: string; target: string }[];
 }
 
-interface GraphViewProps {
-  data: GraphData;
-}
-
-interface NodeWithPosition extends Node {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-}
-
-interface LinkWithNodes {
-  source: NodeWithPosition;
-  target: NodeWithPosition;
-}
-
-export default function GraphView({ data }: GraphViewProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+export default function GraphView({ data }: { data: GraphData }) {
   const router = useRouter();
-  const hoveredNodeIdRef = useRef<string | null>(null);
-  const nodePositionsRef = useRef<Map<string, { x: number; y: number }>>(
-    new Map()
-  );
-  const animationRef = useRef<number | undefined>(undefined);
-  const nodesRef = useRef<NodeWithPosition[]>([]);
-  const linksRef = useRef<LinkWithNodes[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const graphRef = useRef<any>(null);
+  const [width, setWidth] = useState(0);
 
+  // Measure container, re-measure on resize
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setWidth(el.clientWidth));
+    ro.observe(el);
+    setWidth(el.clientWidth);
+    return () => ro.disconnect();
+  }, []);
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const width = canvas.width;
-    const height = canvas.height;
-
-    nodesRef.current = data.nodes.map((node, i) => {
-      const angle = (2 * Math.PI * i) / data.nodes.length;
-      const radius = Math.min(width, height) / 3;
-      return {
-        ...node,
-        x: width / 2 + radius * Math.cos(angle) + (Math.random() - 0.5) * 50,
-        y: height / 2 + radius * Math.sin(angle) + (Math.random() - 0.5) * 50,
-        vx: 0,
-        vy: 0,
-      };
-    });
-
-    linksRef.current = data.links.map((link) => ({
-      source: nodesRef.current.find((n) => n.id === link.source)!,
-      target: nodesRef.current.find((n) => n.id === link.target)!,
-    }));
-
-    const simulate = () => {
-      const nodes = nodesRef.current;
-      const links = linksRef.current;
-
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[j].x - nodes[i].x;
-          const dy = nodes[j].y - nodes[i].y;
-          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          const force = 500 / (dist * dist);
-          const fx = (dx / dist) * force;
-          const fy = (dy / dist) * force;
-          nodes[i].vx -= fx;
-          nodes[i].vy -= fy;
-          nodes[j].vx += fx;
-          nodes[j].vy += fy;
-        }
+  // Turn on auto-rotation once the graph has rendered
+  useEffect(() => {
+    if (!width) return;
+    const t = setTimeout(() => {
+      const controls = graphRef.current?.controls?.();
+      if (controls) {
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.6;
       }
+    }, 800);
+    return () => clearTimeout(t);
+  }, [width]);
 
-      links.forEach((link) => {
-        const dx = link.target.x - link.source.x;
-        const dy = link.target.y - link.source.y;
-        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-        const force = (dist - 80) * 0.01;
-        const fx = (dx / dist) * force;
-        const fy = (dy / dist) * force;
-        link.source.vx += fx;
-        link.source.vy += fy;
-        link.target.vx -= fx;
-        link.target.vy -= fy;
-      });
-
-      nodes.forEach((node) => {
-        node.vx *= 0.9;
-        node.vy *= 0.9;
-        node.x += node.vx;
-        node.y += node.vy;
-
-        node.x = Math.max(50, Math.min(width - 50, node.x));
-        node.y = Math.max(50, Math.min(height - 50, node.y));
-
-        nodePositionsRef.current.set(node.id, { x: node.x, y: node.y });
-      });
-    };
-
-    const draw = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      ctx.strokeStyle = "#ccc";
-      ctx.lineWidth = 1;
-      linksRef.current.forEach((link) => {
-        ctx.beginPath();
-        ctx.moveTo(link.source.x, link.source.y);
-        ctx.lineTo(link.target.x, link.target.y);
-        ctx.stroke();
-      });
-
-      nodesRef.current.forEach((node) => {
-        const isTag = node.id.startsWith("tag-");
-        const isHovered = hoveredNodeIdRef.current === node.id;
-
-        ctx.beginPath();
-        if (isTag) {
-          ctx.arc(node.x, node.y, isHovered ? 14 : 10, 0, 2 * Math.PI);
-          ctx.fillStyle = isHovered ? "#9333ea" : "#a855f7";
-        } else {
-          ctx.arc(node.x, node.y, isHovered ? 18 : 14, 0, 2 * Math.PI);
-          ctx.fillStyle = isHovered ? "#2563eb" : "#3b82f6";
-        }
-        ctx.fill();
-
-        ctx.fillStyle = "#333";
-        ctx.font = "11px Arial";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        const label = node.label.length > 15 ? node.label.slice(0, 15) + "..." : node.label;
-        ctx.fillText(label, node.x, node.y + (isTag ? 20 : 24));
-      });
-
-      simulate();
-      animationRef.current = requestAnimationFrame(draw);
-    };
-
-    draw();
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
+  const handleNodeClick = useCallback(
+    (node: GraphNode) => {
+      if (!String(node.id).startsWith("tag-")) {
+        router.push(`/post/${node.id}`);
       }
-    };
-  }, [data]);
+    },
+    [router]
+  );
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const x = (e.clientX - rect.left) * scaleX;
-    const y = (e.clientY - rect.top) * scaleY;
-
-    let foundId: string | null = null;
-    nodePositionsRef.current.forEach((pos, id) => {
-      const dx = x - pos.x;
-      const dy = y - pos.y;
-      if (Math.sqrt(dx * dx + dy * dy) < 20) {
-        foundId = id;
-      }
-    });
-
-    if (hoveredNodeIdRef.current !== foundId) {
-      hoveredNodeIdRef.current = foundId;
-      canvas.style.cursor = foundId ? "pointer" : "default";
-    }
+  const graphData = {
+    nodes: data.nodes.map((n) => ({ ...n, name: n.label })),
+    links: data.links,
   };
 
-  const handleClick = () => {
-    const hoveredId = hoveredNodeIdRef.current;
-    if (hoveredId && !hoveredId.startsWith("tag-")) {
-      router.push(`/post/${hoveredId}`);
-    }
-  };
+  const isTag = (id: unknown) => String(id).startsWith("tag-");
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={600}
-      height={500}
-      className="mx-auto"
-      onMouseMove={handleMouseMove}
-      onClick={handleClick}
-    />
+    <div
+      ref={containerRef}
+      style={{
+        background: "#060614",
+        borderRadius: 10,
+        overflow: "hidden",
+        position: "relative",
+        width: "100%",
+      }}
+    >
+      {width > 0 && (
+        <ForceGraph3D
+          ref={graphRef}
+          graphData={graphData}
+          width={width}
+          height={500}
+          backgroundColor="#060614"
+          nodeId="id"
+          nodeLabel="name"
+          nodeColor={(node: GraphNode) =>
+            isTag(node.id) ? "#c084fc" : "#60a5fa"
+          }
+          nodeVal={(node: GraphNode) => (isTag(node.id) ? 3 : 6)}
+          nodeOpacity={0.92}
+          linkColor={() => "rgba(148,163,184,0.2)"}
+          linkWidth={0.6}
+          linkDirectionalParticles={2}
+          linkDirectionalParticleWidth={1.2}
+          linkDirectionalParticleSpeed={0.005}
+          linkDirectionalParticleColor={() => "rgba(148,163,184,0.7)"}
+          onNodeClick={handleNodeClick}
+          nodeLabel={(node: GraphNode) => String(node.name ?? node.id)}
+        />
+      )}
+
+      {/* Interaction hint */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 10,
+          left: 0,
+          right: 0,
+          textAlign: "center",
+          fontSize: "0.68rem",
+          color: "rgba(100,116,139,0.65)",
+          fontFamily: "var(--font-patrick-hand)",
+          pointerEvents: "none",
+          letterSpacing: "0.05em",
+        }}
+      >
+        drag to rotate · scroll to zoom · click node to open
+      </div>
+    </div>
   );
 }

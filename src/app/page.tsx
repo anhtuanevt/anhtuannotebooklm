@@ -23,7 +23,7 @@ export default function Home() {
       {/* Notebook */}
       <div
         className="flex shadow-2xl"
-        style={{ maxWidth: 700, width: "100%", borderRadius: 4 }}
+        style={{ maxWidth: 860, width: "100%", borderRadius: 4 }}
       >
         {/* Spine — stretches to match page height, rings distribute evenly */}
         <div
@@ -55,7 +55,7 @@ export default function Home() {
         </div>
 
         {/* Page */}
-        <div className="flex-1 jb-page rounded-r p-9 relative overflow-hidden">
+        <div className="flex-1 jb-page rounded-r p-10 relative overflow-hidden">
           {/* ── Title ── */}
           <div className="text-center mb-7">
             <div className="flex items-center justify-center gap-1 mb-1 text-base">
@@ -71,7 +71,7 @@ export default function Home() {
             <h1
               className="font-bold tracking-widest leading-none mb-3"
               style={{
-                fontSize: "2.8rem",
+                fontSize: "3.2rem",
                 fontFamily: "var(--font-kalam)",
               }}
             >
@@ -95,9 +95,9 @@ export default function Home() {
           </div>
 
           {/* ── Two columns ── */}
-          <div className="grid grid-cols-2 gap-0">
+          <div className="grid grid-cols-2 gap-0 text-[0.9rem]">
             {/* ─ Left column ─ */}
-            <div className="pr-5 border-r border-dashed border-gray-300">
+            <div className="pr-7 border-r border-dashed border-gray-300">
               {/* My Journals banner */}
               <div className="jb-banner jb-banner-pink">
                 <span>♥</span> My Journals
@@ -155,7 +155,7 @@ export default function Home() {
             </div>
 
             {/* ─ Right column ─ */}
-            <div className="pl-5">
+            <div className="pl-7">
               {/* My Interests */}
               <div className="jb-banner jb-banner-orange">
                 <span>📚</span> My Interests
