@@ -1,15 +1,16 @@
 ---
-title: "Hành trình học Affiliate (WarriorPlus): Những gì mình thật sự hiểu sau buổi đầu"
+title: "Hành trình học Affiliate (WarriorPlus): Buổi 1: Buổi đầu tiên học được gì"
 date: "2026-04-21"
 tags: ["affiliate", "warriorplus", "landing-page", "funnel"]
 ---
 
-Hôm qua mình có một buổi học về affiliate, cụ thể là hệ sinh thái của WarriorPlus.
+Tư duy ship product của một dân kỹ thuật lâu nay là build product => build tốt nhất trong khả năng, nghĩ mọi cách để sản phẩm best nhất, sau đó mới bán
 
-Ban đầu mình nghĩ affiliate khá đơn giản: chọn sản phẩm → đăng link → có người mua → có tiền.
-Nhưng sau buổi học, mình nhận ra là mình đã hiểu sai khá nhiều.
+Nhưng làm sao để gọi là một sản phẩm tốt, nhiều người làm sao bạn biết là cái đó tốt nhất ?
 
-Bài viết này là quá trình mình "vỡ ra" từng chút một — và cũng để ghi lại mình đang đứng ở đâu.
+Với affiliate Warrius cũng vậy, mọi người làm vendor thường tiếp cận theo hướng build product, chuẩn bị mọi thứ rồi mới launch, lúc đó mới đi tìm affiliate ?
+
+Câu hỏi là: Bạn là ai ở trong thị trường, làm sao để người ta bán hàng cho bạn ?
 
 ---
 
@@ -23,30 +24,6 @@ Mình được học về 5P:
 - Price (giá)
 - Promotion (cách bán)
 
-Nhưng thực tế:
-
-👉 Mình **chỉ mới hiểu rõ 2 cái đầu**:
-
-- Place
-- Person
-
-👉 Và bắt đầu chạm vào:
-
-- Landing page / funnel
-
-Còn lại:
-
-- Product
-- Price
-- Promotion
-
-→ Mình **mới chỉ "biết" chứ chưa hiểu sâu**
-
-Điều này làm mình nhận ra:
-
-> Không cần hiểu hết ngay từ đầu, quan trọng là hiểu đúng thứ tự
-
----
 
 ## 2. Place – WarriorPlus thực chất là gì?
 
@@ -60,18 +37,16 @@ Hiện tại WarriorPlus:
 Không phải kiểu công ty lớn phức tạp:
 
 - team nhỏ
-- có thể liên hệ support
+- có thể liên hệ support dễ dàng
 - khá "mở"
 
 👉 Insight của mình:
 
-> Đây là sân chơi mà người mới vẫn có cơ hội
+> Đây là sân chơi mà người mới vẫn có cơ hội, mỗi ngày có rất nhiều sản phẩm launch nhưng người thành công cũng rất ít, network vendor với affiliate nhỏ 
 
 ---
 
 ## 3. Person – Khách hàng trên đây là ai?
-
-Đây là phần mình thấy thú vị nhất.
 
 Khách hàng:
 
@@ -88,25 +63,13 @@ Hành vi:
 
 👉 Insight:
 
-> Không cần quá "cao siêu", quan trọng là nói đúng cách
+> Không cần quá "cao siêu", quan trọng là nói đúng cách, landing page đầy đủ thông tin 
 
 ---
 
-## 4. Điều mình bắt đầu hiểu: Funnel quan trọng hơn sản phẩm
+## 4. Tư duy về Landing Page (cái mình "vỡ" nhiều nhất)
 
-Trước đây mình nghĩ:
-
-- Sản phẩm tốt → sẽ bán được
-
-Nhưng giờ mình thấy:
-
-> Funnel mới là thứ quyết định tiền
-
----
-
-## 5. Tư duy về Landing Page (cái mình "vỡ" nhiều nhất)
-
-### 5.1 Traffic là thứ rất khó có
+### 4.1 Traffic là thứ rất khó có
 
 User không vào web nhiều lần.
 
@@ -116,13 +79,13 @@ User không vào web nhiều lần.
 
 ---
 
-### 5.2 Nguyên tắc quan trọng
+### 4.2 Nguyên tắc quan trọng
 
 > Không để user rời đi khi chưa khai thác hết giá trị
 
 ---
 
-### 5.3 Không chỉ là 1 page, mà là cả hệ thống
+### 4.3 Không chỉ là 1 page, mà là cả hệ thống
 
 Thay vì:
 
@@ -133,25 +96,22 @@ Phải nghĩ:
 - Sales page
 - Checkout
 - Upsell
-- Downsell
 - Follow-up
 
 👉 Mỗi bước đều có thể kiếm thêm tiền
 
 ---
 
-### 5.4 Tận dụng tối đa mỗi user
+### 4.4 Tận dụng tối đa mỗi user
 
 - Mua rồi → upsell
-- Không mua → downsell / giữ lại
 - Chuẩn bị thoát → popup
 - Chưa mua → lấy email
 
 👉 Không bỏ phí traffic
-
 ---
 
-## 6. Sai lầm của mình (và người mới)
+## 5. Sai lầm của mình (và người mới)
 
 ### ❌ Landing page quá ngắn
 
@@ -185,68 +145,15 @@ Phải nghĩ:
 
 ## 8. Cách mình sẽ làm từ giờ
 
-Thay vì làm ẩu, mình sẽ:
-
-- Xây landing page theo từng phần:
-  1. Hook
-  2. Problem
-  3. Solution
-  4. Benefit
-  5. Proof
-  6. Offer
-  7. CTA
-  8. FAQ
-
+Thay vì làm ẩu, mình sẽ: tìm công thứ xây dựng landingpage, đầy đủ thông tin và phải kiếm soát từng phần mà AI gen ra
 👉 Mỗi phần có nhiệm vụ riêng
 
 ---
 
-## 9. Một điều mình thấy khá "ngược đời"
-
-> Landing page dài thường bán tốt hơn
-
-Vì:
-
-- khách hàng cần được giải thích
-- cần được thuyết phục từng bước
-
----
-
-## 10. Điều mình CHƯA hiểu (nhưng sẽ học tiếp)
-
-Hiện tại mình vẫn còn mơ hồ về:
-
-- Product:
-  - sản phẩm nào mới thực sự bán được?
-- Price:
-  - đặt giá thế nào là hợp lý?
-- Promotion:
-  - traffic từ đâu ra?
-  - scale như thế nào?
-
-👉 Đây sẽ là phần mình học tiếp
-
----
-
-## 11. Tổng kết
+## 9. Tổng kết
 
 Sau buổi học, mình nhận ra:
 
-- Traffic rất khó → phải tận dụng tối đa
-- Funnel quan trọng hơn mình nghĩ
-- Affiliate không chỉ là đăng link → mà là hệ thống
-
-Và quan trọng nhất:
-
-> Mình không cần biết hết ngay
-> Mình chỉ cần hiểu đúng và làm dần
-
----
-
-Bước tiếp theo của mình:
-
-- Chọn 1 sản phẩm trên WarriorPlus
-- Mổ xẻ funnel của họ
-- Tự làm lại 1 landing page
-
-Hy vọng sau vài lần "fail", mình sẽ hiểu sâu hơn những thứ hôm nay mình mới chỉ chạm vào.
+- Phải chọn đúng đối tượng khách hàng, hiểu rõ người mình bán là gì, sản phẩm là gì
+- Phải giữ chân khách hàng ở landing page, cố gắng upsale khách hàng
+- Mindset của người kinh doanh khác người bạn sản phẩm, đừng suy nghĩ về sản phẩm quá nhiều
