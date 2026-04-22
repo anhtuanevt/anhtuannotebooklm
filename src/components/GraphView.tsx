@@ -14,7 +14,7 @@ const ForceGraph3D = dynamic(() => import("react-force-graph-3d"), {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#060614",
+        background: "#fffef0",
         color: "#475569",
         fontFamily: "var(--font-patrick-hand)",
         fontSize: "0.9rem",
@@ -86,7 +86,7 @@ export default function GraphView({ data }: { data: GraphData }) {
     <div
       ref={containerRef}
       style={{
-        background: "#060614",
+        background: "#fffef0",
         borderRadius: 10,
         overflow: "hidden",
         position: "relative",
@@ -99,22 +99,22 @@ export default function GraphView({ data }: { data: GraphData }) {
           graphData={graphData}
           width={width}
           height={500}
-          backgroundColor="#060614"
+          backgroundColor="#fffef0"
           nodeId="id"
           nodeLabel="name"
-          nodeColor={(node: GraphNode) =>
+          nodeColor={(node: any) =>
             isTag(node.id) ? "#c084fc" : "#60a5fa"
           }
-          nodeVal={(node: GraphNode) => (isTag(node.id) ? 3 : 6)}
+          nodeVal={(node: any) => (isTag(node.id) ? 3 : 6)}
           nodeOpacity={0.92}
-          linkColor={() => "rgba(148,163,184,0.2)"}
+          linkColor={() => "rgba(100,116,139,0.25)"}
           linkWidth={0.6}
           linkDirectionalParticles={2}
           linkDirectionalParticleWidth={1.2}
           linkDirectionalParticleSpeed={0.005}
-          linkDirectionalParticleColor={() => "rgba(148,163,184,0.7)"}
-          onNodeClick={handleNodeClick}
-          nodeLabel={(node: GraphNode) => String(node.name ?? node.id)}
+          linkDirectionalParticleColor={() => "rgba(100,116,139,0.6)"}
+          onNodeClick={(node: any) => handleNodeClick(node)}
+          nodeLabel={(node: any) => String(node.name ?? node.id)}
         />
       )}
 
@@ -127,7 +127,7 @@ export default function GraphView({ data }: { data: GraphData }) {
           right: 0,
           textAlign: "center",
           fontSize: "0.68rem",
-          color: "rgba(100,116,139,0.65)",
+          color: "rgba(100,116,139,0.8)",
           fontFamily: "var(--font-patrick-hand)",
           pointerEvents: "none",
           letterSpacing: "0.05em",
