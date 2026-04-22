@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f5dc;
+  --foreground: #2c2c2c;
+  --paper: #fffef0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-caveat: var(--font-caveat);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.paper {
+  background: var(--paper);
+  box-shadow: 
+    0 1px 1px rgba(0,0,0,0.08),
+    0 2px 2px rgba(0,0,0,0.08),
+    0 4px 4px rgba(0,0,0,0.08),
+    0 8px 8px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+.paper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50px;
+  border-left: 2px solid #ff999980;
+}
+
+.article-content h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.article-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.article-content p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+  font-size: 1.25rem;
+}
+
+.article-content ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.article-content li {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.article-content ol {
+  list-style: decimal;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.article-content blockquote {
+  border-left: 4px solid #d4d4d4;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #555;
+  font-size: 1.25rem;
+}
+
+.article-content strong {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.article-content hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 2rem 0;
+}
+
+.article-content code {
+  background: #f4f4f4;
+  padding: 0.125rem 0.25rem;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* ── Bullet Journal Homepage ─────────────────────────── */
+.jb-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+.jb-banner-pink   { background: #fda4af; color: #881337; border-color: #fb7185; }
+.jb-banner-orange { background: #fed7aa; color: #9a3412; border-color: #f97316; }
+.jb-banner-teal   { background: #99f6e4; color: #134e4a; border-color: #2dd4bf; }
+.jb-banner-purple { background: #ddd6fe; color: #4c1d95; border-color: #a78bfa; }
+
+.jb-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 12px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  border: 1.5px solid rgba(0,0,0,0.1);
+}
+.jb-tag-blue   { background: #bfdbfe; color: #1e3a5f; }
+.jb-tag-green  { background: #bbf7d0; color: #14532d; }
+.jb-tag-amber  { background: #fde68a; color: #78350f; }
+
+.jb-quote-bubble {
+  border: 2px dashed #c8b8a2;
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.55);
+  position: relative;
+}
+
+.jb-page {
+  background: #fffef0;
+  background-image: radial-gradient(circle, #c8b88a 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.jb-spine-ring {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  height: 10px;
+  border-radius: 999px;
+  background: #2d2d4e;
+  border: 1px solid #3d3d5e;
 }

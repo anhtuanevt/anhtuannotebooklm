@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Warrius Plus - MMO Journey Blog
 
-## Getting Started
+Blog cá nhân về hành trình Make Money Online.
 
-First, run the development server:
+## Cấu trúc
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- `/` - Trang chủ
+- `/blog` - Danh sách bài viết + Graph View
+- `/post/[slug]` - Chi tiết bài viết
+
+## Thêm bài viết mới
+
+Tạo file `.md` trong thư mục `content/posts/`:
+
+```markdown
+---
+title: "Tiêu đề bài viết"
+date: "2026-04-22"
+tags: ["affiliate", "warriorplus", "landing-page"]
+---
+
+Nội dung markdown ở đây...
+
+## Heading 2
+
+Nội dung...
+
+- List item 1
+- List item 2
+
+> Quote
+
+**Bold text**
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Tags
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Tags dùng để tạo liên kết trong Graph View. Bài viết có cùng tag sẽ được kết nối với nhau.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Lệnh
 
-## Learn More
+| Lệnh | Mô tả |
+|------|-------|
+| `npm run dev` | Chạy local (http://localhost:3000) |
+| `npm run build` | Build production |
+| `npm run deploy` | Deploy lên Vercel |
 
-To learn more about Next.js, take a look at the following resources:
+## Graph View
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Node màu xanh: Bài viết (click để đọc)
+- Node màu tím: Tags
+- Đường nối: Bài viết cùng tag
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Cấu trúc thư mục
 
-## Deploy on Vercel
+```
+blog/
+├── content/
+│   └── posts/          # Thêm file .md ở đây
+│       └── example.md
+├── src/
+│   ├── app/
+│   │   ├── page.tsx    # Trang chủ
+│   │   ├── blog/       # Trang blog
+│   │   └── post/       # Trang bài viết
+│   ├── components/
+│   │   └── GraphView.tsx
+│   └── lib/
+│       └── posts.ts    # Xử lý markdown
+└── package.json
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Live URL
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+https://blog-lilac-theta-61.vercel.app
